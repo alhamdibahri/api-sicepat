@@ -50,10 +50,9 @@ class PackageList extends Model
         parent::boot();
 
         static::deleted(function($pickup) {
-            if($pickup->count() == 0) {
+            if($pickup->where('pickup_id', $pickup->pickup_id)->count() == 0) {
                 $pickup->pickup()->delete();
             }
-             // do the rest of the cleanup...
         });
     }
 }
